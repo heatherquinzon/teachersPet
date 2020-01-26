@@ -12,9 +12,9 @@
       margin: 0 auto;
       overflow: hidden;
       /* Add this */
-     /* background-color: #EAEDF0;*/
-        background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-simple-creative-hand-painted-wind-dark-brown-wood-grain-background-grainwood-image_69686.jpg")
-      /* Add this */
+      /* background-color: #EAEDF0;*/
+      background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-simple-creative-hand-painted-wind-dark-brown-wood-grain-background-grainwood-image_69686.jpg")
+        /* Add this */
     }
 
     #head {
@@ -31,20 +31,24 @@
       padding-bottom: 0;
     }
 
-    #screenShot {
-        background-image: url("https://images.macrumors.com/t/Ip4pqKQmAJJTZMLTmU1Ry-vdFJU=/800x0/article-new/2018/03/camera-icon-macos-screenshot-250x250.jpg");
-      background-color: white;
-        background-size: cover;
-      width: 50px;
-      height: 50px;
-    }
-
     #btnFullscreen {
       background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDc9AJ91H8iB_bBWdezhwmLWSRKDIWVtbFsEuAPC31F4DDFHVKuw&s");
       background-color: white;
-        background-size: cover;
+      background-size: cover;
       width: 50px;
       height: 50px;
+      border-radius: 50%;
+      border-color: #F09A9D;
+    }
+
+    #screenShot {
+      background-image: url("https://images.macrumors.com/t/Ip4pqKQmAJJTZMLTmU1Ry-vdFJU=/800x0/article-new/2018/03/camera-icon-macos-screenshot-250x250.jpg");
+      background-color: white;
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border-color: #D6E9FE;
     }
 
     img {
@@ -52,11 +56,11 @@
       max-height: 100%;
     }
 
-      .mainBody{
-          width: 90vw;
-          margin: auto;
-      }  
-      
+    .mainBody {
+      width: 90vw;
+      margin: auto;
+    }
+
     .booth {
       width: 400px;
       background: #ccc;
@@ -85,7 +89,7 @@
       height: 75vh;
       background-color: lightyellow;
       box-sizing: border-box;
-      border: double greenyellow;  
+      border: double greenyellow;
     }
 
     .liveFeed {
@@ -118,112 +122,104 @@
     <h1>~TEACHER'S PET~</h1>
   </div>
 
-    <div class="mainBody">
-    
-  <div class="leftSide">
-    <div class="liveFeed">
-      <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
-      <img src="http://10.8.0.4:8081/">
-    </div>
-    <div class="photoTranslator">
-      <h1>PHOTO TRANSLATOR</h1>
+  <div class="mainBody">
+
+    <div class="leftSide">
+      <div class="liveFeed">
+        <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
+        <img src="http://10.8.0.4:8081/">
+      </div>
+      <div class="photoTranslator">
+        <h1>PHOTO TRANSLATOR</h1>
         <textarea id="pText" rows="4" cols="50" readonly></textarea>
+      </div>
     </div>
+
+    <div class="rightSide">
+      <div class="transcription">
+        <h1>AUDIO TRANSCRIPTION</h1>
+      </div>
+    </div>
+
   </div>
 
-  <div class="rightSide">
-    <div class="transcription">
-    <h1>AUDIO TRANSCRIPTION</h1>
-    </div>
+  <div>
+    <footer id="footerID">
+      <button id="btnFullscreen" type="button"></button>
+      <button id="screenShot"></button>
+    </footer>
   </div>
-
-        </div>
-        
-    <div>
-        <footer id="footerID">
-            <button id="btnFullscreen" type="button"></button>
-            <button id="screenShot"></button>
-        </footer>
-    </div>
 
   <script>
-        function toggleFullscreen(elem) {
-            elem = elem || document.documentElement;
-            if (!document.fullscreenElement && !document.mozFullScreenElement &&
-            !document.webkitFullscreenElement && !document.msFullscreenElement) {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-            } else if (elem.mozRequestFullScreen) {
-                elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-            }
-        }  else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            }
-        }//end of else
-        }//end of fxn
+    function toggleFullscreen(elem) {
+      elem = elem || document.documentElement;
+      if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }//end of else
+    }//end of fxn
 
-      document.getElementById('btnFullscreen').addEventListener('click', function () {
+    document.getElementById('btnFullscreen').addEventListener('click', function () {
       toggleFullscreen();
-        });
+    });
 
-      function takeScreenShot(){
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {};
-        xhr.open('GET', 'http://10.8.0.1/takeScreenshot');
-        xhr.send();
-          console.log("TOOK SCREENSHOT")
-      }
-      
-      document.getElementById('screenShot').addEventListener('click', function () {
+    function takeScreenShot() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () { };
+      xhr.open('GET', 'http://10.8.0.1/takeScreenshot');
+      xhr.send();
+      console.log("TOOK SCREENSHOT")
+    }
+
+    document.getElementById('screenShot').addEventListener('click', function () {
       takeScreenShot();
-        });
-      
-      function populatePhotoText(){
-//            const xhr = new XMLHttpRequest(),
-//            method = "GET",
-//            url = "https://10.8.0.1/getTextTranscription";
-//
-//            xhr.open(method, url, true);
-//            xhr.onreadystatechange = function () {
-//                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-//                    console.log(xhr.responseText + "GOTIN");
-//                } else {
-//                    console.log("asfkajsdbifiasbfiasf");
-//                }
-//            };
-//          xhr.send();
-          var xhr = new XMLHttpRequest();
-          //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-          xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
+    });
 
-          // If specified, responseType must be empty string or "text"
-          xhr.responseType = 'text';
+    function populatePhotoText() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
 
-          xhr.onload = function () {
-            if (xhr.readyState === xhr.DONE) {
-                if (xhr.status === 200) {
-                    console.log(xhr.response);
-                    console.log(xhr.responseText);
-                }
-            }
-          };
+      // If specified, responseType must be empty string or "text"
+      xhr.responseType = 'text';
 
-          xhr.send(null);
-            };//end of pupulatePhotoText fxn
-      
-      populatePhotoText();
-      
+      var response;
+
+      xhr.onload = function () {
+        if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 200) {
+            console.log(xhr.response);
+            response = xhr.responseText;
+            console.log("should be something: " + response);
+
+            document.getElementById("pText").value = response;
+            console.log("after adding response?");
+          }
+        }
+      };
+
+      xhr.send(null);
+    };//end of pupulatePhotoText fxn
+
+    populatePhotoText();
+
   </script>
 </body>
 
