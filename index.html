@@ -74,8 +74,9 @@
       width: 65%;
       height: 75vh;
       background-color: maroon;
-      font-size: 0px;
+      /*font-size: 0px;*/
       text-align: center;
+      /*display: block;*/
     }
 
     .rightSide {
@@ -83,7 +84,6 @@
       width: 35%;
       height: 75vh;
       background-color: lightyellow;
-      font-size: 0px;
       box-sizing: border-box;
       border: double greenyellow;  
     }
@@ -129,9 +129,9 @@
       <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
       <img src="http://10.8.0.4:8081/">
     </div>
-
     <div class="photoTranslator">
-      <!-- <h1>PHOTO TRANSLATOR</h1> -->
+      <h1>PHOTO TRANSLATOR</h1>
+        <textarea id="pText" rows="4" cols="50" readonly></textarea>
     </div>
   </div>
 
@@ -143,42 +143,91 @@
 
         </div>
         
-  <footer id="footerID">
-    <button id="btnFullscreen" type="button"></button>
-    <button id="screenShot"></button>
-  </footer>
+    <div>
+        <footer id="footerID">
+            <button id="btnFullscreen" type="button"></button>
+            <button id="screenShot"></button>
+        </footer>
+    </div>
 
   <script>
-    function toggleFullscreen(elem) {
-      elem = elem || document.documentElement;
-      if (!document.fullscreenElement && !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-          elem.msRequestFullscreen();
-        } else if (elem.mozRequestFullScreen) {
-          elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) {
-          elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-        }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        }
-      }
-    }
+        function toggleFullscreen(elem) {
+            elem = elem || document.documentElement;
+            if (!document.fullscreenElement && !document.mozFullScreenElement &&
+            !document.webkitFullscreenElement && !document.msFullscreenElement) {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        }  else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }//end of else
+        }//end of fxn
 
-    document.getElementById('btnFullscreen').addEventListener('click', function () {
+      document.getElementById('btnFullscreen').addEventListener('click', function () {
       toggleFullscreen();
-    });
+        });
 
+      function takeScreenShot(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {};
+        xhr.open('GET', 'http://10.8.0.1/takeScreenshot');
+        xhr.send();
+          console.log("TOOK SCREENSHOT")
+      }
+      
+      document.getElementById('screenShot').addEventListener('click', function () {
+      takeScreenShot();
+        });
+      
+      function populatePhotoText(){
+//            const xhr = new XMLHttpRequest(),
+//            method = "GET",
+//            url = "https://10.8.0.1/getTextTranscription";
+//
+//            xhr.open(method, url, true);
+//            xhr.onreadystatechange = function () {
+//                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+//                    console.log(xhr.responseText + "GOTIN");
+//                } else {
+//                    console.log("asfkajsdbifiasbfiasf");
+//                }
+//            };
+//          xhr.send();
+          var xhr = new XMLHttpRequest();
+          //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+          xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
+
+          // If specified, responseType must be empty string or "text"
+          xhr.responseType = 'text';
+
+          xhr.onload = function () {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.response);
+                    console.log(xhr.responseText);
+                }
+            }
+          };
+
+          xhr.send(null);
+            };//end of pupulatePhotoText fxn
+      
+      populatePhotoText();
+      
   </script>
 </body>
 
