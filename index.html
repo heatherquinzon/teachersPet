@@ -25,6 +25,12 @@
       text-decoration: underline 4px;
       text-decoration-style: dashed;
     }
+    
+      #teachName{
+          margin: 0px;
+          margin-top: 0px;
+          padding-top: 0px;
+      }
 
     #footerID {
       text-align: center;
@@ -42,7 +48,7 @@
     }
 
     #screenShot {
-      background-image: url("https://images.macrumors.com/t/Ip4pqKQmAJJTZMLTmU1Ry-vdFJU=/800x0/article-new/2018/03/camera-icon-macos-screenshot-250x250.jpg");
+      background-image: url("https://cdn3.iconfinder.com/data/icons/glypho-photography/64/camera-alt-512.png");
       background-color: white;
       background-size: cover;
       width: 50px;
@@ -120,6 +126,7 @@
 <body>
   <div id="head">
     <h1>~TEACHER'S PET~</h1>
+      <h3 id="teachName"></h3>
   </div>
 
   <div class="mainBody">
@@ -146,10 +153,11 @@
   <div>
     <footer id="footerID">
       <button id="btnFullscreen" type="button"></button>
-      <button id="screenShot"></button>
+      <button id="screenShot" onclick="takeScreenShot();populatePhotoText();"></button>
     </footer>
   </div>
 
+    <!-- START OF SCRIPT -->
   <script>
     function toggleFullscreen(elem) {
       elem = elem || document.documentElement;
@@ -181,6 +189,8 @@
       toggleFullscreen();
     });
 
+
+    //THIS TAKES A SCREEN SHOT AND CONSOLES LOG ONCE IT GOES THRU
     function takeScreenShot() {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () { };
@@ -189,10 +199,12 @@
       console.log("TOOK SCREENSHOT")
     }
 
+    //below code calls the onclick fxn
     document.getElementById('screenShot').addEventListener('click', function () {
       takeScreenShot();
     });
 
+    //POPULATES THE PHOTO TEXTAREA
     function populatePhotoText() {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
@@ -209,8 +221,10 @@
             response = xhr.responseText;
             console.log("should be something: " + response);
 
-            document.getElementById("pText").value = response;
-            console.log("after adding response?");
+            document.getElementById("pText").value += response + " ";
+
+            console.log("after adding response?" + response);
+
           }
         }
       };
@@ -219,6 +233,64 @@
     };//end of pupulatePhotoText fxn
 
     populatePhotoText();
+
+    function repeat() {
+      console.log("timer repeat");
+      //location.reload();
+    }
+
+    //runs populatePhotoText every 3 seconds
+    setInterval(populatePhotoText, 3000);
+     
+      //TEACHER NAME CODE
+//    function teachName() {
+//      var xhr = new XMLHttpRequest();
+//      xhr.open('GET', 'http://10.8.0.1/getProfessor', true);
+//
+//      // If specified, responseType must be empty string or "text"
+//      xhr.responseType = 'text';
+//
+//      var response;
+//
+//      xhr.onload = function () {
+//        if (xhr.readyState === xhr.DONE) {
+//          if (xhr.status === 200) {
+//            console.log(xhr.response);
+//            response = xhr.responseText;
+//            document.getElementById("teachName").value = response + "'s ClassRoom";
+//            console.log("Teacher's Name: " + response);
+//          }
+//        }
+//      };
+//
+//      xhr.send(null);
+//    }//end of teachName
+//      
+//      $("document").ready(function() {
+//        teachName();
+//      });
+      document.addEventListener("DOMContentLoaded", function(event) { 
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://10.8.0.1/getProfessor', true);
+
+        // If specified, responseType must be empty string or "text"
+        xhr.responseType = 'text';
+
+        var response;
+
+        xhr.onload = function () {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.response);
+                    response = xhr.responseText;
+                    document.getElementById("teachName").innerHTML = response + "'s ClassRoom";
+                    console.log("Teacher's Name: " + response);
+                }
+            }
+        };
+
+        xhr.send(null);
+      });//end of teachName
 
   </script>
 </body>

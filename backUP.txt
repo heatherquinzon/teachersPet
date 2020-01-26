@@ -215,3 +215,252 @@ function populatePhotoText(){
 //                }
 //            };
 //          xhr.send();
+
+
+
+
+
+//  BACKUP 12PM
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>WELCOME TO TEACHER'S PET</title>
+  <style>
+    /*BELOW ARE ALL NEW CODE*/
+    body {
+      font-family: monospace;
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      /* Add this */
+      /* background-color: #EAEDF0;*/
+      background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-simple-creative-hand-painted-wind-dark-brown-wood-grain-background-grainwood-image_69686.jpg")
+        /* Add this */
+    }
+
+    #head {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      text-align: center;
+      font-size: 20px;
+      text-decoration: underline 4px;
+      text-decoration-style: dashed;
+    }
+
+    #footerID {
+      text-align: center;
+      padding-bottom: 0;
+    }
+
+    #btnFullscreen {
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDc9AJ91H8iB_bBWdezhwmLWSRKDIWVtbFsEuAPC31F4DDFHVKuw&s");
+      background-color: white;
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border-color: #F09A9D;
+    }
+
+    #screenShot {
+      background-image: url("https://images.macrumors.com/t/Ip4pqKQmAJJTZMLTmU1Ry-vdFJU=/800x0/article-new/2018/03/camera-icon-macos-screenshot-250x250.jpg");
+      background-color: white;
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border-color: #D6E9FE;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .mainBody {
+      width: 90vw;
+      margin: auto;
+    }
+
+    .booth {
+      width: 400px;
+      background: #ccc;
+      border: 10px solid #ddd;
+      margin: auto;
+    }
+
+    #testing {
+      color: red;
+      background-color: black;
+    }
+
+    .leftSide {
+      float: left;
+      width: 65%;
+      height: 75vh;
+      background-color: maroon;
+      /*font-size: 0px;*/
+      text-align: center;
+      /*display: block;*/
+    }
+
+    .rightSide {
+      float: right;
+      width: 35%;
+      height: 75vh;
+      background-color: lightyellow;
+      box-sizing: border-box;
+      border: double greenyellow;
+    }
+
+    .liveFeed {
+      width: 100%;
+      height: 50%;
+      background-color: #F09A9D;
+      box-sizing: border-box;
+      border: outset blueviolet;
+    }
+
+    .photoTranslator {
+      width: 100%;
+      /* Add this */
+      height: 50%;
+      background-color: #F5CF8E;
+      box-sizing: border-box;
+      border: inset greenyellow;
+    }
+
+    .transcription {
+      text-align: center;
+    }
+
+    /* END NEW CSS*/
+  </style>
+</head>
+
+<body>
+  <div id="head">
+    <h1>~TEACHER'S PET~</h1>
+  </div>
+
+  <div class="mainBody">
+
+    <div class="leftSide">
+      <div class="liveFeed">
+        <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
+        <img src="http://10.8.0.4:8081/">
+      </div>
+      <div class="photoTranslator">
+        <h1>PHOTO TRANSLATOR</h1>
+        <textarea id="pText" rows="13" cols="50" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="rightSide">
+      <div class="transcription">
+        <h1>AUDIO TRANSCRIPTION</h1>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <footer id="footerID">
+      <button id="btnFullscreen" type="button"></button>
+      <button id="screenShot" onclick="takeScreenShot();populatePhotoText();"></button>
+    </footer>
+  </div>
+
+  <script>
+    function toggleFullscreen(elem) {
+      elem = elem || document.documentElement;
+      if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }//end of else
+    }//end of fxn
+
+    document.getElementById('btnFullscreen').addEventListener('click', function () {
+      toggleFullscreen();
+    });
+
+
+    //THIS TAKES A SCREEN SHOT AND CONSOLES LOG ONCE IT GOES THRU
+    function takeScreenShot() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () { };
+      xhr.open('GET', 'http://10.8.0.1/takeScreenshot');
+      xhr.send();
+      console.log("TOOK SCREENSHOT")
+    }
+
+    //below code calls the onclick fxn
+    document.getElementById('screenShot').addEventListener('click', function () {
+      takeScreenShot();
+    });
+
+    //POPULATES THE PHOTO TEXTAREA
+    function populatePhotoText() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
+
+      // If specified, responseType must be empty string or "text"
+      xhr.responseType = 'text';
+
+      var response;
+
+      xhr.onload = function () {
+        if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 200) {
+            console.log(xhr.response);
+            response = xhr.responseText;
+            console.log("should be something: " + response);
+
+            document.getElementById("pText").value += response + " ";
+
+            //            document.getElementById("pText").value += response || response.textContent || response.innerText;
+            console.log("after adding response?" + response);
+
+          }
+        }
+      };
+
+      xhr.send(null);
+    };//end of pupulatePhotoText fxn
+
+    populatePhotoText();
+
+    function repeat() {
+      console.log("timer repeat");
+      //location.reload();
+    }
+
+    //var timer = setTimeout(repeat, 1000);
+
+    //runs populatePhotoText every 3 seconds
+    setInterval(populatePhotoText, 3000);
+
+  </script>
+</body>
+
+</html>
