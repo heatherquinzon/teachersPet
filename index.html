@@ -28,22 +28,26 @@
       padding-bottom: 0;
     }
 
+    #btnFullscreen {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDc9AJ91H8iB_bBWdezhwmLWSRKDIWVtbFsEuAPC31F4DDFHVKuw&s");
+        background-color: white;
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border-color: #F09A9D;
+    }
+
     #screenShot {
         background-image: url("https://images.macrumors.com/t/Ip4pqKQmAJJTZMLTmU1Ry-vdFJU=/800x0/article-new/2018/03/camera-icon-macos-screenshot-250x250.jpg");
-      background-color: white;
+        background-color: white;
         background-size: cover;
-      width: 50px;
-      height: 50px;
-    }
-
-    #btnFullscreen {
-      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDc9AJ91H8iB_bBWdezhwmLWSRKDIWVtbFsEuAPC31F4DDFHVKuw&s");
-      background-color: white;
-        background-size: cover;
-      width: 50px;
-      height: 50px;
-    }
-
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border-color: #D6E9FE;
+    }  
+      
     img {
       max-width: 100%;
       max-height: 100%;
@@ -182,39 +186,31 @@
         });
       
       function populatePhotoText(){
-//            const xhr = new XMLHttpRequest(),
-//            method = "GET",
-//            url = "https://10.8.0.1/getTextTranscription";
-//
-//            xhr.open(method, url, true);
-//            xhr.onreadystatechange = function () {
-//                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-//                    console.log(xhr.responseText + "GOTIN");
-//                } else {
-//                    console.log("asfkajsdbifiasbfiasf");
-//                }
-//            };
-//          xhr.send();
           var xhr = new XMLHttpRequest();
-          //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
           xhr.open('GET', 'http://10.8.0.1/getTextTranscription', true);
 
           // If specified, responseType must be empty string or "text"
           xhr.responseType = 'text';
+          
+          var response;
 
           xhr.onload = function () {
             if (xhr.readyState === xhr.DONE) {
                 if (xhr.status === 200) {
                     console.log(xhr.response);
-                    console.log(xhr.responseText);
+                    response = xhr.responseText;
+                    console.log("should be something: " + response);
+                    
+                    document.getElementById("pText").value = response;
+                    console.log("after adding response?");
                 }
             }
           };
 
           xhr.send(null);
-            };//end of pupulatePhotoText fxn
+        };//end of pupulatePhotoText fxn
       
-      populatePhotoText();
+        populatePhotoText();
       
   </script>
 </body>

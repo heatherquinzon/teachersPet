@@ -200,3 +200,18 @@ function populatePhotoText(){
         xhr.send();
         console.log(response);  
       };//end of pupulatePhotoText fxn
+      
+      
+//            const xhr = new XMLHttpRequest(),
+//            method = "GET",
+//            url = "https://10.8.0.1/getTextTranscription";
+//
+//            xhr.open(method, url, true);
+//            xhr.onreadystatechange = function () {
+//                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+//                    console.log(xhr.responseText + "GOTIN");
+//                } else {
+//                    console.log("asfkajsdbifiasbfiasf");
+//                }
+//            };
+//          xhr.send();
