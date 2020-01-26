@@ -93,9 +93,10 @@
       float: right;
       width: 35%;
       height: 75vh;
-      background-color: lightyellow;
+      background-color: #D6E9FE;
       box-sizing: border-box;
       border: double greenyellow;
+      overflow: auto;
     }
 
     .liveFeed {
@@ -115,9 +116,18 @@
       border: inset greenyellow;
     }
 
-    .transcription {
+    .transcriptionTitle {
       text-align: center;
     }
+    
+    .transcription{
+        text-align: left;
+        width: 90%;
+        margin: auto;
+        overflow: hidden;
+        height: 60vh;
+        background: #ECECEC;
+      }  
 
     /* END NEW CSS*/
   </style>
@@ -143,9 +153,14 @@
     </div>
 
     <div class="rightSide">
-      <div class="transcription">
-        <h1>AUDIO TRANSCRIPTION</h1>
+      <div class="transcriptionTitle">
+        <h1>AUDIO transcription</h1>
       </div>
+        <div class="transcription">
+            <p id="transcriptionText">
+            
+            </p>
+        </div>
     </div>
 
   </div>
