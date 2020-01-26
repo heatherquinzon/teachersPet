@@ -182,3 +182,21 @@
 </body>
 
 </html>
+
+
+
+
+function populatePhotoText(){
+        var xhr = new XMLHttpRequest();
+          var response;
+          
+        xhr.onreadystatechange = function() {
+             if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+             console.log(xhr.responseText);
+                }
+        };//onrdyfxn
+        
+        xhr.open('GET', 'http://10.8.0.1/getTextTranscription');
+        xhr.send();
+        console.log(response);  
+      };//end of pupulatePhotoText fxn
