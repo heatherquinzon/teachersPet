@@ -3,99 +3,116 @@
 
 <head>
     <title>WELCOME TO TEACHER'S PET</title>
-    <link href="/main.css" rel="stylesheet" />
     <style>
-    /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+        /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+        for details on configuring this project to bundle and minify static web assets. */
 
-/*BELOW ARE ALL NEW CODE*/
-        html {
-            max-height: 100%;
-            max-width: 100%;
+        /*BELOW ARE ALL NEW CODE*/
+        body {
+            font-family: monospace;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            /* Add this */
+            background-color: #EAEDF0;
+            /* Add this */
         }
-img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-}
 
-.booth {
-    width: 400px;
-    background: #ccc;
-    border: 10px solid #ddd;
-    margin: auto;
-}
+        #head {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            text-align: center;
+            font-size: 20px;
+        }
 
-#testing {
-    color: red;
-    background-color: black;
-}
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
 
-.bigBody {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    overflow: hidden; /* Add this */
-    background-color: #EAEDF0; /* Add this */
-}
+        .booth {
+            width: 400px;
+            background: #ccc;
+            border: 10px solid #ddd;
+            margin: auto;
+        }
 
-.leftSide {
-    float: left;
-    width: 50%;
-    height: 550px;
-    background-color: maroon;
-    font-size: 0px;
-}
+        #testing {
+            color: red;
+            background-color: black;
+        }
 
-.rightSide {
-    float: right;
-    width: 50%;
-    height: 550px;
-    background-color: lightyellow;
-    font-size: 0px;
-}
+        /*
+        .bigBody {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        overflow: hidden; 
+        background-color: #EAEDF0; 
+        } */
 
-.liveFeed {
-    width: 100%;
-    height: 50%;
-    background-color: #F09A9D;
-}
+        .leftSide {
+            float: left;
+            width: 65%;
+            height: 550px;
+            background-color: maroon;
+            font-size: 0px;
+            text-align: center;
+        }
 
-.photoTranslator {
-    width: 100%; /* Add this */
-    height: 50%;
-    background-color: #F5CF8E;
-}
+        .rightSide {
+            float: right;
+            width: 35%;
+            height: 550px;
+            background-color: lightyellow;
+            font-size: 0px;
+        }
 
-.transcription {
-    /*height: 200px;*/
-    width: 100%;
-    height: 100%;
-    background-color: #D6E9FE; /* Light blue */
-}
+        .liveFeed {
+            width: 100%;
+            height: 50%;
+            background-color: #F09A9D;
+        }
 
-/* END NEW CSS*/
+        .photoTranslator {
+            width: 100%;
+            /* Add this */
+            height: 50%;
+            background-color: #F5CF8E;
+        }
 
+        .transcription {
+            /*height: 200px;*/
+            width: 100%;
+            height: 100%;
+            background-color: #D6E9FE;
+            /* Light blue */
+        }
+
+        /* END NEW CSS*/
     </style>
 </head>
 
 <body>
-<div>
-    <h1>TEACHER'S PET</h1>
-</div>
+    <div id="head">
+        <h1>TEACHER'S PET</h1>
+    </div>
 
-<div class="bigBody">
+    <!--<div class="bigBody">-->
     <div class="leftSide">
         <div class="liveFeed">
             <!--<h1>LIVE VIDEO FEED</h1>-->
-                <!--<video id="videoTest" width="400" height="400" autoplay></video>-->
-                <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
-                <img src="http://10.8.0.4:8081/" height="400">
+            <!--<video id="videoTest" width="400" height="400" autoplay></video>-->
+            <!-- THIS IS CALLING COREY'S CAMERA IP ADDRESS -->
+            <img src="http://10.8.0.4:8081/" height="400">
         </div>
 
         <div class="photoTranslator">
             <h1>PHOTO TRANSLATOR</h1>
-            <!--<input id="bC" type="button" onclick="chBackcolor('red')" value="Change Background" />-->
+            <button onclick="openFullscreen();">Open Fullscreen</button>
+            <button onclick="closeFullscreen();">Close Fullscreen</button>
         </div>
     </div>
 
@@ -105,7 +122,34 @@ img {
         </div>
     </div>
 
-</div>
+    <!--</div>-->
+
+    <script>
+        var elem = document.documentElement;
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+        }
+
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+    </script>
 </body>
 
 </html>
